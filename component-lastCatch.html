@@ -9,28 +9,29 @@
   </head>
   <body>
     <div id="root">
-      <word-delay></word-delay>
-      <word-delay></word-delay>
-      <word-delay></word-delay>
-      <word-delay></word-delay>
+      <word-delay start_word="안녕"></word-delay>
+      <word-delay start_word="잘가"></word-delay>
+      <word-delay start_word="시계"></word-delay>
+      <word-delay start_word="핸드폰"></word-delay>
     </div>
   </body>
   <script>
     Vue.component("word-delay", {
       template: `
-      <div>
-        <div>{{question}}</div>
-            <form v-on:submit="onSubmitForm">
-                <input type="text" ref="answerFef" v-model="answer" />
-                <button type="submit">Click</button>
-            </form>
-        <div>{{result}}</div>
+        <div>
+            <div>{{question}}</div>
+                <form v-on:submit="onSubmitForm">
+                    <input type="text" ref="answerFef" v-model="answer" />
+                    <button type="submit">Click</button>
+                </form>
+            <div>{{result}}</div>
         </div>
         `,
       // 차이점 !
+      props: ["start_word"],
       data() {
         return {
-          question: "시작",
+          question: this.start_word,
           answer: "",
           result: "",
         };
