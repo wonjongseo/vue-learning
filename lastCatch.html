@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <div>{{question}}</div>
+      <form v-on:submit="onSubmitForm">
+        <input type="text" ref="answerFef" v-model="answer" />
+        <button type="submit">Click</button>
+      </form>
+      <div>{{result}}</div>
+    </div>
+  </body>
+  <script>
+    var app = new Vue({
+      el: "#root",
+      data: {
+        question: "시작",
+        answer: "",
+        result: "",
+      },
+      methods: {
+        onSubmitForm(e) {
+          e.preventDefault();
+          var q_last = this.question.slice(-1);
+          var a_first = this.answer.slice(0, 1);
+          console.log(q_last);
+          console.log(a_first);
+          console.log(a_first === q_last);
+          if (q_last === a_first) {
+            this.result = "correct";
+            // var nextQuestion = this.answer.slice(-1);
+            this.question = this.answer;
+          } else {
+            this.result = "incorrect";
+          }
+          this.answer = "";
+          this.$refs.answerFef.focus();
+        },
+      },
+    });
+  </script>
+</html>
